@@ -28,3 +28,18 @@ class Log:
         with open(full_path, tag) as file:
             if tag == 'a': file.write(f'\r\n{date_now} [INFO] ' + text)
             else: file.write(f'{date_now} [INFO] ' + text)
+            
+    def error(self, text: str):
+        tag = ""
+        hour = datetime.now().strftime('%H')
+        date_now = datetime.now().strftime('%Y%m%d-%H:%M:%S')
+        name_file = FILE_NAME + hour
+        full_path = self.path_error + f'/{name_file}'
+        if os.path.exists(full_path):
+            tag = 'a'
+        else:
+            tag = 'w'
+
+        with open(full_path, tag) as file:
+            if tag == 'a': file.write(f'\r\n{date_now} [ERROR] ' + text)
+            else: file.write(f'{date_now} [ERROR] ' + text)

@@ -12,13 +12,16 @@ dictionary = {}
 
 log = Log(PATH_DIR_LOGS_SYSTEM, PATH_DIR_LOGS_ERROR)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello"}
-
 @app.get("/variables")
 async def get_variables():
     return dictionary
+
+@app.get("/variable/{key}")
+async def get_variable(key: str):
+    if key not in dictionary:
+        log.error(f"Chave não encontrada")
+        raise HTTPException(status_code=404, detail="Chave não encontrada")
+    return {"value": dictionary[key]}
 
 @app.delete("/delete/{key}")
 async def remove_variable(key: str):

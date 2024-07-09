@@ -28,7 +28,7 @@ class Log:
         with open(full_path, tag) as file:
             if tag == 'a': file.write(f'\r\n{date_now} [INFO] ' + text)
             else: file.write(f'{date_now} [INFO] ' + text)
-            
+
     def error(self, text: str):
         tag = ""
         hour = datetime.now().strftime('%H')
@@ -41,5 +41,5 @@ class Log:
             tag = 'w'
 
         with open(full_path, tag) as file:
-            if tag == 'a': file.write(f'\r\n{date_now} [ERROR] ' + text)
+            if tag == 'a': file.write(f'{date_now} [ERROR] ' + text)
             else: file.write(f'{date_now} [ERROR] ' + text)
